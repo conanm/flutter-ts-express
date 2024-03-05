@@ -22,6 +22,7 @@ export async function getActivitiesForUser(req, res) {
 // Function to toggle the 'completed' status of an activity
 export async function toggleActivityCompleted(req, res) {
   const { id } = req.params;
+  const { on } = req.body;
 
   try {
     const activity = await prisma.activity.findUnique({
@@ -34,7 +35,7 @@ export async function toggleActivityCompleted(req, res) {
 
     const updatedActivity = await prisma.activity.update({
       where: { id: Number(id) },
-      data: { completed: !activity.completed },
+      data: { completed: on },
     });
 
     res.json(updatedActivity);

@@ -23,3 +23,11 @@ GET http://localhost:3000/activities HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwOTYyNzU5NSwiZXhwIjoxNzA5NjMxMTk1fQ.o3s85ZytiPMGuWCERQpo0IfZDFnh6i4zteQ75T7GNR4
 
 
+### Getting Activities
+PATCH http://localhost:3000/activities/1/toggle HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwOTYyNzU5NSwiZXhwIjoxNzA5NjMxMTk1fQ.o3s85ZytiPMGuWCERQpo0IfZDFnh6i4zteQ75T7GNR4
+
+{
+  "on": true
+}
