@@ -17,6 +17,9 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### Getting Activities
+GET http://localhost:3000/activities HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwOTYyNDE3MiwiZXhwIjoxNzA5NjI3NzcyfQ.kewR4kTwrN9XUe5ccmuh23Y9wTK6e-n187cOT38cVdI
 
 
 
