@@ -1,3 +1,15 @@
-`docker-compose up`: for DB + server
-`npx prisma generate`: schema/etc.
-`npm run seed`: seed the db (can attach to dockerfile maybe)
+# Conan's Test
+
+This app runs a basic ts-node/prisma/express setup and has a very simple Flutter frontend within.
+
+# Instructions to run
+
+```
+npm i
+docker-compose up
+cp .env.sample .env
+npm run prisma:all
+npm start
+cd frontend
+flutter run
+```
