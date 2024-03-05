@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch -r ts-node/register index.ts",
     "start": "node -r ts-node/register index.ts",
+    "prisma:all": "npm run prisma:format && npm run prisma:generate",
     "prisma:format": "npx prisma format",
     "prisma:generate": "npx prisma generate",
-    "seed": "npx prisma db push && npx prisma db seed"
+    "seed": "npx prisma db push && npx prisma db seed"    
   },
   "keywords": [],
   "author": "",

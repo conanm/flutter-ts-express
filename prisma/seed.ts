@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -30,13 +31,15 @@ async function main() {
     },
   });
   // Add more activities as needed
+  const password = "securepassword";
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // Seed a User
   await prisma.user.create({
     data: {
       username: "john_doe",
       email: "john@example.com",
-      password: "securepassword", // In a real application, ensure passwords are hashed
+      password: hashedPassword,
     },
   });
   // Add more users as needed

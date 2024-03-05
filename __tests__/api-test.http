@@ -1,0 +1,23 @@
+### Registration
+POST http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "test_user_58",
+  "email": "user55@example.com",
+  "password": "password123"
+}
+
+### Working Login
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "user55@example.com",
+  "password": "password123"
+}
+
+
+
+
+
