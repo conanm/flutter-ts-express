@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 // Function to get all activities for a user
 export async function getActivitiesForUser(req, res) {
   // Or use req.user.id if you're getting the ID from a JWT token
-  const { userId } = req.params;
+  const { userId } = req.user;
 
   try {
     const activities = await prisma.activity.findMany({

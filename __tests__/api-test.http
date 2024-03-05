@@ -13,14 +13,13 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "user55@example.com",
-  "password": "password123"
+  "email": "john@example.com",
+  "password": "securepassword"
 }
+
 
 ### Getting Activities
 GET http://localhost:3000/activities HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwOTYyNDE3MiwiZXhwIjoxNzA5NjI3NzcyfQ.kewR4kTwrN9XUe5ccmuh23Y9wTK6e-n187cOT38cVdI
-
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcwOTYyNzU5NSwiZXhwIjoxNzA5NjMxMTk1fQ.o3s85ZytiPMGuWCERQpo0IfZDFnh6i4zteQ75T7GNR4
 
 
