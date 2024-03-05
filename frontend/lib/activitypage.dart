@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +6,7 @@ class Activity {
   final int id;
   final String title;
   final String description;
-  final Bool completed;
+  bool completed;
 
   Activity(
       {required this.id,
@@ -19,8 +17,9 @@ class Activity {
   factory Activity.fromJson(Map<String, dynamic> json) {
     return Activity(
       id: json['id'],
-      name: json['name'],
-      isActive: json['isActive'],
+      title: json['title'],
+      description: json['description'],
+      completed: json['completed'],
     );
   }
 }
@@ -51,11 +50,17 @@ class ApiService {
     }
   }
 
-  Future<void> toggleActivity(int id) async {
-    final response =
-        await http.patch(Uri.parse('$baseUrl/activities/$id/toggle'));
-    if (response.statusCode != 200) {
-      throw Exception('Failed to toggle activity');
+  Future<Activity> toggleActivity(int id) async {
+    final response = await http.patch(
+      Uri.parse('$baseUrl/activities/$id/toggle'),
+      headers: {'Authorization': 'Bearer $_token'},
+    );
+    if (response.statusCode == 200) {
+      dynamic body = jsonDecode(response.body);
+      Activity activity = Activity.fromJson(body);
+      return activity;
+    } else {
+      throw Exception('Failed to load activity');
     }
   }
 
@@ -84,29 +89,34 @@ class ApiService {
   }
 }
 
-class ActivityPage extends StatelessWidget {
-  final ApiService apiService = ApiService();
-
+class ActivityPage extends StatefulWidget {
   @override
+  _ActivityPageState createState() => _ActivityPageState();
+}
+
+class _ActivityPageState extends State<ActivityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Activities'),
       ),
       body: FutureBuilder<List<Activity>>(
-        future: apiService.getActivities(),
+        future: ApiService().getActivities(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(snapshot.data![index].name),
+                  title: Text(snapshot.data![index].title),
                   trailing: Switch(
-                    value: snapshot.data![index].isActive,
-                    onChanged: (bool value) {
-                      snapshot.data![index].isActive = value;
-                      apiService.toggleActivity(snapshot.data![index].id);
+                    value: snapshot.data![index].completed,
+                    onChanged: (bool value) async {
+                      snapshot.data![index].completed = value;
+                      Activity updatedActivity = await ApiService()
+                          .toggleActivity(snapshot.data![index].id);
+                      snapshot.data![index] = updatedActivity;
+                      setState(() {});
                     },
                   ),
                 );
